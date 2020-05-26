@@ -6,7 +6,8 @@ public class WormController : MonoBehaviour
 {
     public KeyCode jumpKey;
     public KeyCode fowardKey;
-    public Rigidbody z;
+    public KeyCode backKey;
+    public Rigidbody rb;
     public Vector3 x;
     public Vector3 y;
     // Update is called once per frame
@@ -15,13 +16,20 @@ public class WormController : MonoBehaviour
         if (Input.GetKeyDown(jumpKey))
         {
             Debug.Log("Jump taste wurde gedrückt");
-            z.AddForce(x);
+            rb.AddForce(x);
         }
 
         if (Input.GetKeyDown(fowardKey))
         {
             Debug.Log("Forwärts taste wurde gedrückt");
-            z.AddForce(y);
+            rb.AddForce(y);
+
+        }
+
+        if (Input.GetKeyDown(backKey))
+        {
+            Debug.Log("Zurück taste wurde gedrückt");
+            rb.AddForce(-y);
 
         }
     }
