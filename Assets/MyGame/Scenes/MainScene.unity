@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4448219, g: 0.49437737, b: 0.57356495, a: 1}
+  m_IndirectSpecularColor: {r: 0.44482148, g: 0.49437684, b: 0.57356364, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -96,7 +96,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 4faa0f86455a717419641fc034c0696b,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -226,7 +227,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 10
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!1 &705507993
 GameObject:
@@ -720,8 +721,9 @@ MonoBehaviour:
   backKey: 97
   shootKey: 109
   rb: {fileID: 1093682266}
-  vecJump: {x: 0, y: 200, z: 0}
-  vecForward: {x: 100, y: 0, z: 0}
+  vecJump: {x: 0, y: 20, z: 0}
+  vecForward: {x: 10, y: 0, z: 0}
+  shootforce: {x: 200, y: 0, z: 0}
   gun: {fileID: 1047827913}
   projectile: {fileID: 320706422}
 --- !u!4 &1093682265 stripped
