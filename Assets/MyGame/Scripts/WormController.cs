@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class WormController : MonoBehaviour
     public Vector3 vecJump;
     public Vector3 vecForward;
     public Vector3 shootforce;
+    private bool left;
 
     public GameObject gun;
     
@@ -33,10 +35,8 @@ public class WormController : MonoBehaviour
         }
         if (Input.GetKey(fowardKey))
         {
-
-            if(!(this.gameObject.transform.rotation.y == 0f)) {
-                this.gameObject.transform.Rotate(0f, 180f,0f, Space.Self);
-            }
+            this.gameObject.transform.eulerAngles = new Vector3(0,0,0);
+            left = false;
             Debug.Log("Forwärts taste wurde gedrückt");
             rb.AddForce(vecForward);
         }
@@ -49,9 +49,8 @@ public class WormController : MonoBehaviour
             // this.gameObject.transform.localScale = flip;
 
       
-            if(!(this.gameObject.transform.rotation.y == 1f)) {
-                this.gameObject.transform.Rotate(0f, 180f,0f, Space.Self);
-            }
+            this.gameObject.transform.eulerAngles = new Vector3(0,180,0);
+            left = true;
             Debug.Log("Zurück taste wurde gedrückt");
             rb.AddForce(-vecForward);
         }
@@ -60,9 +59,12 @@ public class WormController : MonoBehaviour
         if (Input.GetKeyDown(shootKey))
         {
             // Vector3 gunpos = gun.transform.position;
-  
             var shot = Instantiate(projectile, gun.transform.position, gun.transform.rotation);
-            shot.GetComponent<Rigidbody>().AddForce(shootforce);
+            if(left) {
+                shot.GetComponent<Rigidbody>().AddForce(-shootforce);
+            } else {
+                shot.GetComponent<Rigidbody>().AddForce(shootforce);
+            }
         }
 
     }
