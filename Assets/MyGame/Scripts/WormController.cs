@@ -17,41 +17,51 @@ public class WormController : MonoBehaviour
     private bool left;
 
     public GameObject gun;
+
+    public Vector3 raydir;
     
     // Update is called once per frame
     public GameObject projectile;
     void Update()
     {
-        if (Input.GetKey(jumpKey))
+                // Bit shift the index of the layer (8) to get a bit mask
+        int layerMask = 1 << 8;
+
+        // This would cast rays only against colliders in layer 8.
+        // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(this.gameObject.transform.Find("ray").gameObject.transform.position, raydir, out hit, 0.2f))
         {
-            Debug.Log("Jump taste wurde gedrückt");
-            rb.AddForce(vecJump);
+            // Debug.Log("Did Hit");
+        
+        // Debug.DrawRay(this.gameObject.transform.Find("ray").gameObject.transform.position, raydir, Color.yellow);
+      
+
+        
+            if (Input.GetKey(jumpKey))
+            {
+                rb.AddForce(vecJump);
+            }
         }
 
         if (Input.GetKey(downKey))
         {
-            Debug.Log("Jump taste wurde gedrückt");
             rb.AddForce(-vecJump);
         }
         if (Input.GetKey(fowardKey))
         {
             this.gameObject.transform.eulerAngles = new Vector3(0,0,0);
             left = false;
-            Debug.Log("Forwärts taste wurde gedrückt");
             rb.AddForce(vecForward);
         }
 
         if (Input.GetKey(backKey))
         {
-            // var Scale = this.gameObject.transform.localScale;
-            // Vector2 invert = new Vector3(-1,1,1);
-            // var flip = Scale * invert; 
-            // this.gameObject.transform.localScale = flip;
-
-      
             this.gameObject.transform.eulerAngles = new Vector3(0,180,0);
             left = true;
-            Debug.Log("Zurück taste wurde gedrückt");
             rb.AddForce(-vecForward);
         }
 
@@ -66,6 +76,8 @@ public class WormController : MonoBehaviour
                 shot.GetComponent<Rigidbody>().AddForce(shootforce);
             }
         }
-
+        
+     
+    
     }
 }
